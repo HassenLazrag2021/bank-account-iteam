@@ -1,0 +1,24 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id : r1
+          uri : http://localhost:8000/
+          predicates :
+            - Path=/customers/**
+        - id : r2
+          uri: http://localhost:8100/
+          predicates:
+            - Path=/accounts/**
+    discovery:
+      enabled: true
+  application:
+    name: gateway-service
+server:
+  port: 8888
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
